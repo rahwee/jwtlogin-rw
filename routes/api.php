@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::group(['middleware' => 'auth:jwt', 'prefix' => 'v1/report'], function(){
-    Route::get('login', [AuthController::class , 'login']);
+Route::group(["prefix" => "v1"], function () {
+    Route::post('login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::apiResource('contacts', [ContactController::class]);
+Route::get('product', [ProductController::class, 'index']);
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
+// Route::group(['middleware' => ['auth:api']], function () {
+//     Route::get('product', [ProductController::class, 'index']);
 // });
+

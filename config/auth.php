@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'jwt',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -40,6 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
+        'jwt' => [
+            'driver' => 'jwt'
+        ],
     ],
 
     /*
@@ -62,7 +69,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Contact::class,
         ],
 
         // 'users' => [

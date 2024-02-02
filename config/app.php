@@ -16,7 +16,10 @@ return [
     |
     */
 
+    'jwt_secret' => env('JWT_SECRET', 'default@key'),
+
     'name' => env('APP_NAME', 'Laravel'),
+    'db_auth' => env('DN_DB_AUTH', NULL),
 
     /*
     |--------------------------------------------------------------------------
