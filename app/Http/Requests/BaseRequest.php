@@ -18,6 +18,7 @@ abstract class BaseRequest extends FormRequest
     protected function isUserHasPermission() 
     {
         $user = $this->user();
+
         return $user->can('user_permission');
     }
 

@@ -5,9 +5,10 @@ namespace App\Services\Jwt;
 use App\Enums\Constants;
 use App\Services\SVContact;
 use Illuminate\Http\Response;
+use App\Http\Tools\ParamTools;
+
 use App\Services\SVAppLicense;
 use App\Exceptions\POSException;
-use App\Http\Tools\ParamTools;
 use Illuminate\Support\Facades\Hash;
 
 class AppManagerLogin implements IJWTContract
@@ -33,9 +34,10 @@ class AppManagerLogin implements IJWTContract
         if (!isset($user) || !Hash::check($password, $user->password)) {
             throw new POSException('Incorrect email or password', "WRONG_PASSWORD", [], Response::HTTP_BAD_REQUEST);
         }
-
+        
         /* Prevent case user link to restaurant not account */
         $account = $user->account;
+
         $account_id = $account->parent_id ? $account->parent_id : $account->id;
 
         ParamTools::reconnectDB($user->account->db_name);
@@ -44,7 +46,7 @@ class AppManagerLogin implements IJWTContract
 
         $extra = array(
             'db_name'        => $user->account->db_name,
-            'restaurant_gid' => "302c588c-9987-3ae0-8a83-43d7ca3890d9"
+            'restaurant_gid' => !$user->restaurants->isEmpty() ? $user->restaurants[0]->global_id : $user->account->global_id
         );
 
         return $this->generateToken($authManager, $login_type, $user, $extra);

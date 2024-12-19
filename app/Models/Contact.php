@@ -84,6 +84,13 @@ class Contact extends Authenticatable
         return $this->belongsTo(Account::class, 'account_id');
     }
 
+    public function restaurants()
+    {
+        return $this->belongsToMany(Account::class, "account_contact", "contact_id", "account_id")
+            ->whereNotNull('account.parent_id')
+            ->wherePivotNull("deleted_at");
+    }
+
     /**
      * Tags can be "resturant" coz 1 contact can assign to resturant but 1 rest have only tag
      * BelongsToMany join with another field

@@ -10,6 +10,7 @@ use App\Services\SVProduct;
 
 class ProductController extends BaseApi
 {
+    
     public function getService()
     {
         return new SVProduct();

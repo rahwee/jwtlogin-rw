@@ -27,16 +27,7 @@ class JWTManager
      * switch: for switching restaurant
      */
     private $typeList = [
-        Constants::LOGIN_TYPE_BACKOFFICE    => ["class" => "BackOffice",    "switch" => true],
-        Constants::LOGIN_TYPE_POS           => ["class" => "POS",           "switch" => true],
-        Constants::LOGIN_TYPE_EMAIL         => ["class" => "Email",         "switch" => false],
-        Constants::LOGIN_TYPE_MPOS          => ["class" => "MPOS",          "switch" => false],
-        Constants::LOGIN_TYPE_KIOSK         => ["class" => "KIOSK",         "switch" => false],
-        Constants::LOGIN_TYPE_CUSTOMER_MENU => ["class" => "CustomerMenu",  "switch" => false],
-        Constants::LOGIN_TYPE_BUTLER_CLIENT => ["class" => "ButlerClient",  "switch" => false],
-        Constants::LOGIN_TYPE_BUTLER_USER   => ["class" => "ButlerUser",    "switch" => false],
         Constants::LOGIN_TYPE_APP_MANAGER   => ["class" => "AppManager",    "switch" => false],
-        Constants::LOGIN_TYPE_KDS           => ["class" => "KDS",           "switch" => true],
     ];
 
     public function __construct($loginType = null)
@@ -63,10 +54,8 @@ class JWTManager
                 $factory = new Factory($this->path);
                 $this->service = $factory->make($this->typeList[$this->loginType]["class"] . "Login");
                 if (!$this->service) return null;
-
                 return $this->service;
             }
-
             return null;
         } catch (Exception $ex) {
             throw $ex;

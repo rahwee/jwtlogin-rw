@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Exceptions\POSException;
 use App\Services\Jwt\JWTManager;
+use App\Http\Controllers\BaseApi;
 use App\Http\Requests\GenericLogin;
 
 class AuthController extends BaseApi

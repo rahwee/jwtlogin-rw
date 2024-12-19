@@ -28,8 +28,7 @@ class StoreProductRequest extends BaseRequest
      */
     public function rules(): array
     {
-        $data = $this->getService()->getRules();
-        return $data;
+        return [];
     }
 
     public function bodyParameters()

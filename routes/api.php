@@ -20,9 +20,7 @@ Route::group(["prefix" => "v1"], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::get('product', [ProductController::class, 'index']);
-
-// Route::group(['middleware' => ['auth:api']], function () {
-//     Route::get('product', [ProductController::class, 'index']);
-// });
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('product', [ProductController::class, 'index']);
+});
 

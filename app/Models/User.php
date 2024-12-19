@@ -11,8 +11,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements JWTSubject
 {
+    
     use HasApiTokens, HasFactory, Notifiable;
-
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -46,6 +47,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function getJWTIdentifier()
     {
+        dd(1);
         return $this->getKey();
     }
 
